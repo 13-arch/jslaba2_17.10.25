@@ -1,12 +1,7 @@
 const treki = [
-    { 
-        title: "Letyat poeza", 
-        artist: "Elvira T, MVGMA", 
-        src: "music/poezda.mp3", 
-        cover: "covers/train.webp" 
-      },
-    { title: "Песня Лабубу", artist: "Алиса Шмелева", src: "music/trek2.mp3", cover: "covers/cover2.jpg" },
-    { title: "Фонк по дорогам", artist: "МУЗЫКА В МАШИНУ", src: "music/trek3.mp3", cover: "covers/cover3.jpg" }
+    { title: "Letyat poeza", artist: "Elvira T, MVGMA", src: "music/Elvira T, MVGMA - Летят поезда (Remix) (zaycev.net).mp3", cover: "covers/train.webp" },
+    { title: "Песня Лабубу", artist: "Алиса Шмелева", src: "music/Алиса Шмелева - Песня Лабубу (zaycev.net).mp3", cover: "covers/labubu.webp" },
+    { title: "Фонк по дорогам", artist: "МУЗЫКА В МАШИНУ", src: "music/МУЗЫКА В МАШИНУ - Фонк по дорогам (zaycev.net).mp3", cover: "covers/car.webp" }
   ];
 
   let tekIndex = 0;
@@ -54,6 +49,12 @@ const treki = [
   }
 
   function peremeshat() {
+    if (treki.length === 0) return;
+    let rand = Math.floor(Math.random() * treki.length);
+    if (treki.length > 1 && rand === tekIndex) {
+      rand = (rand + 1) % treki.length;
+    }
+    igrat(rand);
     treki.sort(() => Math.random() - 0.5);
     spisok.innerHTML = "";
     treki.forEach((trek, i) => {
@@ -63,7 +64,6 @@ const treki = [
       spisok.appendChild(li);
     });
   }
-
   gromkost.addEventListener("input", () => {
     audio.volume = gromkost.value;
   });
